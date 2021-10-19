@@ -1,0 +1,26 @@
+<% layout('layouts/boilerplate') %>
+    <h1>The Travel Net</h1>
+    <a href="/travelnet/new" class="btn btn-outline-success">Add a new location</a>
+
+    <% for(camp of campground){%>
+        <div class="card" mb-3 style="width: 48rem;">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" alt="" src="<%=camp.image%> ">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-title">
+                        <h5>
+                            <%=camp.title %>
+                        </h5>
+                        <p class="card-text">
+                            <%=camp.description %>
+                        </p>
+                        <a href="/travelnet/<%=camp._id %>" class="btn btn-outline-primary">View <%=camp.title %></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <%} %>

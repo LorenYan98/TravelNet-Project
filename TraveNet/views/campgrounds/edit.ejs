@@ -1,0 +1,42 @@
+<% layout('./layouts/boilerplate') %>
+
+    <form action="/travelnet/<%= campground._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+        <h1 class="text-center">Edit Landscape</h1>
+        <div class="col-6 offset-3">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" value="<%= campground.title%>"
+                    name="campground[title]" placeholder="Title.." aria-describedby="emailHelp" required>
+                <div id="Help" class="form-text">Please share us with your landscape</div>
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" class="form-control" value="<%= campground.location%>" id="location"
+                    name="campground[location]" placeholder="Location.." required>
+            </div>
+            <div class="mb-3">
+                <label for="img" class="form-label">Image Url</label>
+                <input type="text" class="form-control" id="img" value="<%= campground.image%>" name="campground[image]"
+                    placeholder="Image Url" required>
+            </div>
+            <label for="price" class="form-label">General Price</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" id="price" value="<%= campground.price%>"
+                    name="campground[price]" aria-label=" Amount (to the
+                    nearest dollar)" required>
+                <span class="input-group-text">.00</span>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea cols="20" rows="5" type="text" class="form-control" id="description"
+                    name="campground[description]" required
+                    placeholder="Describe anything.."><%= campground.description%></textarea>
+            </div>
+            <button type="submit" class="btn btn-outline-primary mb-3">Update</button>
+    </form>
+    <div class="mb-3">
+        <a href="/travelnet">Back to Landscape</a>
+    </div>
+    </div>
