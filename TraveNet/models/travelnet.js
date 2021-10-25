@@ -25,4 +25,4 @@ CampgroundSchema.post('findOneAndDelete', async function (doc) {
         })
     }
 })
-module.exports = mongoose.model('Travelnet', CampgroundSchema)
+module.exports = mongoose.model('travelnet', CampgroundSchema)
