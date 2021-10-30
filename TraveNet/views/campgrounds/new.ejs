@@ -1,7 +1,7 @@
 <% layout('./layouts/boilerplate') %>
     <h1 class="text-center">New Landscape</h1>
     <div class="col-6 offset-3">
-        <form action="/travelnet" method="POST" novalidate class="validated-form">
+        <form action="/travelnet" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
                 <input type="text" class="form-control" id="title" name="campground[title]" placeholder="Title.."
@@ -13,13 +13,13 @@
                 <input type="text" class="form-control" id="location" name="campground[location]" required
                     placeholder="Location..">
             </div>
-            <div class="mb-3">
+            <input type="file" name="image" id="" multiple>
+            <!-- <div class="mb-3">
                 <label for="img" class="form-label">Image Url</label>
                 <input type="text" class="form-control" id="img" name="campground[image]" placeholder="Image Url"
                     required>
-            </div>
-
-
+            </div> -->
+            <p></p>
             <label for="price" class="form-label">General Price</label>
             <div class="input-group mb-3">
                 <span class="input-group-text">$</span>
