@@ -1,6 +1,7 @@
 <% layout('./layouts/boilerplate') %>
 
-    <form action="/travelnet/<%= campground._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+    <form action="/travelnet/<%= campground._id%>?_method=PUT" method="POST" novalidate class="validated-form"
+        enctype="multipart/form-data">
         <h1 class="text-center">Edit Landscape</h1>
         <div class="col-6 offset-3">
             <div class="mb-3">
@@ -14,11 +15,7 @@
                 <input type="text" class="form-control" value="<%= campground.location%>" id="location"
                     name="campground[location]" placeholder="Location.." required>
             </div>
-            <div class="mb-3">
-                <label for="img" class="form-label">Image Url</label>
-                <input type="text" class="form-control" id="img" value="<%= campground.image%>" name="campground[image]"
-                    placeholder="Image Url" required>
-            </div>
+
             <label for="price" class="form-label">General Price</label>
             <div class="input-group mb-3">
                 <span class="input-group-text">$</span>
@@ -34,6 +31,20 @@
                     name="campground[description]" required
                     placeholder="Describe anything.."><%= campground.description%></textarea>
             </div>
+            <div class="mb-3">
+                <label for="img" class="form-label">Add Images</label>
+                <input type="file" class="form-control" id="img" , name="image" multiple>
+            </div>
+            <div class="mb-3">
+                <% campground.image.forEach(function(img, i){ %>
+                    <img src="<%= img.thumbnail%>" class="img-thumbnail" alt="">
+                    <div class="form-check-inline">
+                        <input type="checkbox" id="image<%= i %>" name="deleteImages[]" value="<%= img.filename %>">
+                    </div>
+                    <label for="image<%= i %>">Delete</label>
+                    <% })%>
+            </div>
+
             <button type="submit" class="btn btn-outline-primary mb-3">Update</button>
     </form>
     <div class="mb-3">

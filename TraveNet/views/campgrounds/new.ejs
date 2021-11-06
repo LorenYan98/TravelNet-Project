@@ -1,41 +1,47 @@
 <% layout('./layouts/boilerplate') %>
-    <h1 class="text-center">New Landscape</h1>
+    <link rel="stylesheet" href="/stylesheets/pages.css">
     <div class="col-6 offset-3">
-        <form action="/travelnet" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" name="campground[title]" placeholder="Title.."
-                    aria-describedby="emailHelp" required>
-                <div id="Help" class="form-text">Please share us with your landscape</div>
-            </div>
-            <div class="mb-3">
-                <label for="location" class="form-label">Location</label>
-                <input type="text" class="form-control" id="location" name="campground[location]" required
-                    placeholder="Location..">
-            </div>
-            <input type="file" name="image" id="" multiple>
-            <!-- <div class="mb-3">
+        <div class="card shadow mb-4">
+            <h1 class="text-center mt-3">New Landscape</h1>
+            <div class="card-body">
+                <form action="/travelnet" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="campground[title]"
+                            placeholder="Title.." aria-describedby="emailHelp" required>
+                        <div id="Help" class="form-text">Please share us with your landscape</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="location" name="campground[location]" required
+                            placeholder="Location..">
+                    </div>
+                    <label for="img" class="form-label">Add Images</label>
+                    <input type="file" class="form-control" name="image" id="img" multiple>
+                    <!-- <div class="mb-3">
                 <label for="img" class="form-label">Image Url</label>
                 <input type="text" class="form-control" id="img" name="campground[image]" placeholder="Image Url"
                     required>
             </div> -->
-            <p></p>
-            <label for="price" class="form-label">General Price</label>
-            <div class="input-group mb-3">
-                <span class="input-group-text">$</span>
-                <input type="number" class="form-control" id="price" name="campground[price]" aria-label=" Amount (to the
+                    <p></p>
+                    <label for="price" class="form-label">General Price</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="price" name="campground[price]" aria-label=" Amount (to the
                     nearest dollar)" required>
-                <span class="input-group-text">.00</span>
-            </div>
+                        <span class="input-group-text">.00</span>
+                    </div>
 
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea cols="20" rows="5" type="text" class="form-control" id="description"
-                    name="campground[description]" placeholder="Describe anything.." required></textarea>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea cols="20" rows="5" type="text" class="form-control" id="description"
+                            name="campground[description]" placeholder="Describe anything.." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                </form>
+                <div class="mb-3">
+                    <a href="/travelnet">Back to the main</a>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary mb-3">Submit</button>
-        </form>
-        <div class="mb-3">
-            <a href="/travelnet">Back to the main</a>
         </div>
     </div>

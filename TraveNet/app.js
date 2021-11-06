@@ -13,10 +13,11 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
-
+const mongoSanitize = require('express-mongo-sanitize');
 const travelnetRoutes = require('./routes/travelnet')
 const userRoutes = require('./routes/users');
 const reviewRoutes = require('./routes/reviews');
+const helmet = require('helmet');
 
 main().catch(err => console.log(err));
 
@@ -37,6 +38,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(mongoSanitize());
 const sessionConfig = {
     secret: 'Thisshouldbeabettersecret',
     resave: false,
@@ -49,6 +51,7 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(helmet());
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -70,6 +73,7 @@ app.get('/fakeUser', async (req, res) => {
     const newuser = await User.register(user, 'good');
     res.send(newuser);
 })
+
 
 app.use('/', userRoutes);
 app.use('/travelnet', travelnetRoutes);
