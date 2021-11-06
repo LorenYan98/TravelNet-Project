@@ -1,7 +1,6 @@
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
-
 const express = require('express');
 const path = require('path')
 const mongoose = require('mongoose');
@@ -19,10 +18,15 @@ const userRoutes = require('./routes/users');
 const reviewRoutes = require('./routes/reviews');
 const helmet = require('helmet');
 
-main().catch(err => console.log(err));
 
+const MongoDBStore = require("connect-mongo");
+const dbUrl = process.env.DB_URL;
+
+main().catch(err => console.log(err));
+//await mongoose.connect(dbUrl)
+//'mongodb://localhost:27017/travelnet'
 async function main() {
-    await mongoose.connect('mongodb://localhost:27017/travelnet')
+    await mongoose.connect(dbUrl || 'mongodb://localhost:27017/travelnet')
         .then(() => {
             console.log("CONNECTION OPEN!!");
         })
@@ -39,8 +43,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize());
+
+const secret = precess.env.SECRET || 'Thisshouldbeabettersecret';
+
+const store = MongoDBStore.create({
+    mongoUrl: 'mongodb://localhost:27017/travelnet',
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: secret
+    }
+});
+
+store.on("error", function (e) {
+    console.log("session sotre error!", r)
+})
+
 const sessionConfig = {
-    secret: 'Thisshouldbeabettersecret',
+    store,
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -51,7 +71,8 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: false }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
